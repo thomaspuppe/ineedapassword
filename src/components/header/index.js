@@ -8,9 +8,9 @@ export default class Header extends Component {
 			<header class={style.header}>
 				<h1>ineedapassword.com</h1>
 				<nav>
-					<Link activeClassName={style.active} href="/">Home</Link>
-					<Link activeClassName={style.active} href="/profile">Me</Link>
-					<Link activeClassName={style.active} href="/profile/john">John</Link>
+                    <Link activeClassName={style.active} href="/">PW</Link>
+                    <Link activeClassName={style.active} href="/calculate">C</Link>
+					<Link activeClassName={style.active} href="/info">i</Link>
 				</nav>
 			</header>
 		);
