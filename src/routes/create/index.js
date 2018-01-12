@@ -3,6 +3,11 @@ import style from './style';
 
 export default class Create extends Component {
 
+    state = {
+        passwords: [],
+        count: 5,
+    };
+
     createNumberPassword = () => {
 
         var array = new Uint32Array(10);
@@ -11,15 +16,19 @@ export default class Create extends Component {
         for (var i = 0; i < array.length; i++) {
             console.log(array[i]);
         }
+
+        this.setState({ passwords: array });
+
     };
 
     create = ( evt ) => {
         console.log( evt.target.value );
         this.createNumberPassword();
-        //this.setState({ count: this.state.count+1 });
+        console.log(this.state.passwords)
+        this.setState({ count: this.state.count+1 });
     };
 
-	render() {
+	render({}, {passwords, count}) {
 		return (
             <main class={style.home}>
                 <h1>Create</h1>
@@ -33,6 +42,15 @@ export default class Create extends Component {
                     <input type="radio" id="hard" name="method" value="hard" />
                     <label for="hard">hard</label>
                 </fieldset>
+
+                <h2>Passwords:</h2>
+                <pre>{ passwords }</pre>
+                <ul>
+                    { passwords.map(password => (
+                        <li key={password}>{{ password }}</li>
+                    )) }
+                </ul>
+                <pre>{ count }</pre>
             </main>
 		);
 	}
