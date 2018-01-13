@@ -6,7 +6,7 @@ export default class Create extends Component {
     state = {
         passwords: [],
         length: 16,
-        method: '',
+        method: 'medium',
     };
 
     truncate = (str) => {
@@ -21,8 +21,43 @@ export default class Create extends Component {
         return array;
     };
 
+    createEasyPassword = () => {
+        return new Array(10).fill('Wurstbrot');
+    };
+
+    createMediumPassword = () => {
+        // TODO: filling to be able to iterate is shit.
+        var array = new Array(10).fill('');
+
+        array = array.map(function() {
+            // start simple
+            return Math.random().toString(36).substring(2, 15);
+        });
+        return array;
+    };
+
+    createHardPassword = () => {
+        return new Array(10).fill('Wurstbrot');
+    };
+
     create = () => {
-        var passwords = this.createNumberPassword(); 
+        var passwords;
+        console.log(this.state.method);
+        switch (this.state.method) {
+            case 'number':
+                passwords = this.createNumberPassword();
+                break;
+            case 'easy':
+                passwords = this.createEasyPassword();
+                break;
+            case 'medium':
+                passwords = this.createMediumPassword();
+                break;
+            case 'hard':
+                passwords = this.createHardPassword();
+                break;
+        }
+        
         passwords = passwords.map(this.truncate);
         this.setState({ passwords });
     };
@@ -43,11 +78,11 @@ export default class Create extends Component {
                 <h1>Create</h1>
                 <p>Create random passwords inside your browser.</p>
 
-                <fieldset onChange={this.create}>
+                <fieldset onChange={this.onMethodChange}>
                     <input type="radio" id="easy" name="method" value="easy" />
                     <label for="easy">easy</label>
-                    <input type="radio" id="numbers" name="method" value="numbers" />
-                    <label for="numbers">numbers</label>
+                    <input type="radio" id="number" name="method" value="number" />
+                    <label for="number">number</label>
                     <input type="radio" id="medium" name="method" value="medium" />
                     <label for="medium">medium</label>
                     <input type="radio" id="hard" name="method" value="hard" />
