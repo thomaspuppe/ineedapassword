@@ -62,7 +62,28 @@ export default class Create extends Component {
     };
 
     createHardPassword = () => {
-        return new Array(10).fill('Wurstbrot');
+        
+        // TODO: filling to be able to iterate is shit.
+        var array = new Array(10).fill('');
+
+        // TODO: Remove similar looking characters like O0, Il ???
+        var charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}:"<>?[];,./~';
+
+        array = array.map(function() {
+            var password = '';
+            if(window.crypto && window.crypto.getRandomValues)
+            {
+                var values = new Uint32Array(64);
+                window.crypto.getRandomValues(values);
+                // TODO: read this.state.length here
+                for(var i=0; i<64; i++) {
+                    password += charset[values[i] % charset.length];
+                }
+                return password;
+            }
+            return 'TODO: wastun?'
+        });
+        return array;
     };
 
     create = () => {
