@@ -24,5 +24,8 @@ For detailed explanation on how things work, checkout the [CLI Readme](https://g
 
 # Score History
 
-## out-of-the-box Lighthouse score
+**Lighthouse: out-of-the-box, local**
 PWA 55%, Performance 85%, Accessibility 97%, Best Practices 81%.
+
+**Lighthouse: adding some functionality, deploying it to HTTP/2 server, setting cache headers**
+PWA 100%, Performance 94%, Accessibility 94%, Best Practices 88%.
