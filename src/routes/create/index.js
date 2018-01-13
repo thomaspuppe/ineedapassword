@@ -5,28 +5,43 @@ export default class Create extends Component {
 
     state = {
         passwords: [],
-        length: 16
+        length: 16,
+        method: '',
+    };
+
+    truncate = (str) => {
+        return str.toString().substr(0, this.state.length);
     };
 
     createNumberPassword = () => {
         var array = new Uint32Array(10);
         window.crypto.getRandomValues(array);
-        // Uint42Array -> Array (which is iterable by map)
+        // Uint32Array -> Array (which is iterable by map)
         array = Array.from(array);
-        this.setState({ passwords: array });
+        return array;
     };
 
-    create = ( evt ) => {
-        console.log( evt.target.value );
-        this.createNumberPassword();
-        this.setState({ count: this.state.count+1 });
+    create = () => {
+        var passwords = this.createNumberPassword(); 
+        passwords = passwords.map(this.truncate);
+        this.setState({ passwords });
+    };
+
+    onMethodChange = ( evt ) => {
+        this.setState({ method: evt.target.value }); 
+        this.create();
+    };
+
+    onLengthChange = ( evt ) => {
+        this.setState({ length: evt.target.value }); 
+        this.create();
     };
 
 	render({}, {passwords, length}) {
 		return (
             <main class={style.home}>
                 <h1>Create</h1>
-                <p>This is the Create component.</p>
+                <p>Create random passwords inside your browser.</p>
 
                 <fieldset onChange={this.create}>
                     <input type="radio" id="easy" name="method" value="easy" />
@@ -42,7 +57,7 @@ export default class Create extends Component {
                 <fieldset>
                     <input name="length" id="length" type="range" min="4" max="32" step="1"
                         value={this.state.length}
-                        onChange={evt => this.setState({ length: evt.target.value })} />
+                        onInput={this.onLengthChange} />
                         <span>{this.state.length}</span>
                 </fieldset>
 
