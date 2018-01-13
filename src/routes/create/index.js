@@ -21,8 +21,33 @@ export default class Create extends Component {
         return array;
     };
 
+    // TODO: move to "utils" somewhere
+    // TODO: real randomness via webcrypto
+    // TODO: maybe "get from string" if used on vowels/consonants and so on
+    getRandomItemFromArray = (array) => {
+        return array[Math.floor(Math.random() * array.length)]
+    }
+
+    // easy = "mnemonic" ... maybe restrict the length here?
     createEasyPassword = () => {
-        return new Array(10).fill('Wurstbrot');
+        // TODO: filling to be able to iterate is shit.
+        var array = new Array(10).fill('');
+
+        var vowels = 'aeioe'.split('');
+        var consonants = 'bcdfghklmnpqrstvwxzy'.split('');
+
+        // TODO: arrow function endlich mal verstehen und benutzen
+        var that = this;
+        array = array.map( function() {
+            var password = '';
+            // TODO: read this.state.length here
+            for(var i = 0; i < 32; i++) {
+                password += that.getRandomItemFromArray(consonants);
+                password += that.getRandomItemFromArray(vowels);
+            }
+            return password;
+        });
+        return array;
     };
 
     createMediumPassword = () => {
