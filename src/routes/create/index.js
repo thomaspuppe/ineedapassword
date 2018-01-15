@@ -55,7 +55,7 @@ export default class Create extends Component {
         var array = new Array(10).fill('');
 
         array = array.map(function() {
-            // start simple
+            // TODO: longer, better, some uppercase(?)
             return Math.random().toString(36).substring(2, 15);
         });
         return array;
@@ -124,15 +124,15 @@ export default class Create extends Component {
                 <h1>Create</h1>
                 <p>Create random passwords inside your browser.</p>
 
-                <fieldset onChange={this.onMethodChange}>
-                    <input type="radio" id="easy" name="method" value="easy" />
-                    <label for="easy">easy</label>
-                    <input type="radio" id="number" name="method" value="number" />
-                    <label for="number">number</label>
-                    <input type="radio" id="medium" name="method" value="medium" />
-                    <label for="medium">medium</label>
-                    <input type="radio" id="hard" name="method" value="hard" />
-                    <label for="hard">hard</label>
+                <fieldset onChange={this.onMethodChange} class={style.buttongroup}>
+                    <input type="radio" id="easy" name="method" value="easy" class={style.button_input} />
+                    <label for="easy" class={style.button_label}>easy</label>
+                    <input type="radio" id="number" name="method" value="number" class={style.button_input} />
+                    <label for="number" class={style.button_label}>number</label>
+                    <input type="radio" id="medium" name="method" value="medium" class={style.button_input} />
+                    <label for="medium" class={style.button_label}>medium</label>
+                    <input type="radio" id="hard" name="method" value="hard" class={style.button_input} />
+                    <label for="hard" class={style.button_label}>hard</label>
                 </fieldset>
 
                 <fieldset>
