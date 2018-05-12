@@ -3,11 +3,9 @@ import ReactDOM from 'react-dom'
 import pwgen from 'generate-password'
 
 
-function Headline(props) {
-  return <h1>{props.title}</h1>
-}
+const Headline = props => <h1>{props.title}</h1>
 
-function List(props) {
+const List = props => {
   let itemList = props.items.map(function(item, index){
     return <li key={index}>{item}</li>
   })
