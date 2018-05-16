@@ -5,6 +5,7 @@ import pwgen from 'generate-password'
 
 import Headline from './components/common/Headline'
 import List from './components/common/List'
+import LengthSlider from './components/LengthSlider'
 
 function App() {
   const headline = 'Hello!!! Here are some passwords:'
@@ -16,6 +17,7 @@ function App() {
   return (
     <div>
       <Headline title={headline} />
+      <LengthSlider />
       <List items={passwords} />
     </div>
   )
