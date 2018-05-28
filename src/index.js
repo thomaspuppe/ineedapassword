@@ -18,8 +18,7 @@ class App extends Component {
   }
 
   onPasswordLengthChange (passwordLength) {
-    // TODO: extract the value inside the component, not here!
-    this.setState({passwordLength: passwordLength.target.value})
+    this.setState({passwordLength: passwordLength})
   }
 
   render() {
