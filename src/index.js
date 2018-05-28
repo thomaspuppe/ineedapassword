@@ -24,7 +24,7 @@ class App extends Component {
   render() {
     const headline = 'Hello!!! Here are some passwords:'
     const passwords = pwgen.generateMultiple(5, {
-      length: 10,
+      length: this.state.passwordLength,
       numbers: true
     })
 
