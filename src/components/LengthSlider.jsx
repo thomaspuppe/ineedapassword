@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 
 const LengthSlider = ({passwordLength = 8, onLengthChange }) => 
