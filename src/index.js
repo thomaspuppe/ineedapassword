@@ -6,6 +6,7 @@ import pwgen from 'generate-password'
 import Headline from './components/common/Headline'
 import List from './components/common/List'
 import LengthSlider from './components/LengthSlider'
+import Calculator from './components/Calculator'
 
 class App extends Component {
 
@@ -14,6 +15,8 @@ class App extends Component {
     this.state = {
       passwordLength: 24
     }
+    
+    // TODO: Why do I need to do this???
     this.onPasswordLengthChange = this.onPasswordLengthChange.bind(this)
   }
 
@@ -30,12 +33,21 @@ class App extends Component {
 
     const { passwordLength } = this.state
 
+    // TODO: LengthSlider change soll natürlich nicht den Calculator triggern! (Warum tut ers trotzdem? Ist das Verhindern nicht der Zweck von React?)
+
     return (
-    <div>
-      <Headline title={headline} />
-      <LengthSlider passwordLength={passwordLength} onLengthChange={this.onPasswordLengthChange}/>
-      <List items={passwords} />
-    </div>
+    <main>
+      <section>
+        <Headline title={headline} />
+        <LengthSlider passwordLength={passwordLength} onLengthChange={this.onPasswordLengthChange}/>
+        <List items={passwords} />
+      </section>
+      <hr />
+      <section>
+        <Headline title='Password Calculator' />
+        <Calculator />
+      </section>
+    </main>
     )
   }
 }
