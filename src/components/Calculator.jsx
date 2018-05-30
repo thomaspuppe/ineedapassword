@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import bcryptjs from 'bcryptjs'
 
 class Calculator extends Component {
 
@@ -19,28 +18,56 @@ class Calculator extends Component {
     constructor(props){
         super(props)
         this.state = {
-          display: 'todo'
+          display: '',
+          domain: '',
+          masterpassword: ''
         }
+
+        // TODO: Why do I need to do this???
+        this.onDomainChange = this.onDomainChange.bind(this)
+        this.onMasterpasswordChange = this.onMasterpasswordChange.bind(this)
       }
 
-    componentDidMount() {
+      calculateHash() {
 
+      }
+
+      onDomainChange(evt) {
+        this.setState({domain: evt.target.value})
+        this.calculateHash()
+      }
+
+      onMasterpasswordChange(evt) {
+        this.setState({masterpassword: evt.target.value})
+        this.calculateHash()
+      }
+
+    calculateHash () {
         // TODO: self=this, in modernen JS-Zeiten??
         var self = this;
 
-        this.hash('Wurstbrot').then(hashed => {
+        this.hash( self.state.domain + self.state.masterpassword).then(hashed => {
             self.setState({
                 display: self.encode64(hashed).substr(5,21)
             })
         })
-
     }
 
     render() {
 
         return (
-        <p>Hi there! { this.state.display }
-            </p>
+            <section>
+                <form>
+                    <input name="domain" onChange={this.onDomainChange} />
+                    <input name="masterpassword" onChange={this.onMasterpasswordChange} />
+                </form>
+                <p>
+                    Input: { this.state.domain } + { this.state.masterpassword }
+                </p>
+                <p>
+                    Result: <strong>{ this.state.display }</strong>
+                </p>
+            </section>
         )
     }
 }
